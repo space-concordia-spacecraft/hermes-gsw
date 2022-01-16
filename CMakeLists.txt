@@ -8,6 +8,9 @@ project(GSW)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Includes
+include(build/include/utils.cmake)
+
 # Required libraries
 find_package(glfw3 CONFIG REQUIRED)
 find_package(glad REQUIRED)
@@ -27,3 +30,6 @@ add_executable("GSW" ${GSW_SRC})
 target_link_libraries("GSW" PUBLIC glfw glad::glad imgui::imgui imguizmo::imguizmo glm assimp::assimp spdlog::spdlog_header_only)
 target_include_directories("GSW" PUBLIC include ${STB_INCLUDE_DIRS})
 target_precompile_headers("GSW" PUBLIC include/pch.h)
+
+# Copy assets to build folder
+add_dir_copy("GSW" "$<TARGET_FILE_DIR:GSW>" "assets")
