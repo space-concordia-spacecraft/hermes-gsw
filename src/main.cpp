@@ -185,6 +185,7 @@ void OnGui() {
     ImGui::End();
 
     ImGui::Begin("Style Editor");
+    ImGui::ShowStyleSelector("Theme");
     ImGui::ShowStyleEditor();
     ImGui::End();
 
