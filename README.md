@@ -11,14 +11,24 @@
 ### Setup
 
 1. Install vcpkg by following the instructions [here](https://github.com/microsoft/vcpkg#quick-start-windows).
-2. Clone the repo.
-3. Open the repo as a CLion project.
-4. Navigate to `File => Settings => Build, Execution, Deployment => Toolchains`.
-5. Create a Visual Studio and let CLion autodetect all paths and settings.
-6. Navigate to `File => Settings => Build, Execution, Deployment => CMake`.
-7. Create two CMake profiles for Debug and Release respectively.
-8. Set each of the two CMake profiles to use the Visual Studio toolchain you created above.
-9. In the `CMake Options` field, add the following (and replace with your vcpkg path):
+2. Install the required packages:
+- [x] glad
+- [x] glfw3
+- [x] imgui (docking branch, opengl and glfw bindings)
+- [x] imguizmo
+- [x] glm
+- [x] spdlog
+```
+vcpkg install glfw3 glad imgui[core,docking-experimental,opengl3-binding,glfw-binding] imguizmo glm spdlog --triplet x64-windows
+```
+3. Clone the repo.
+4. Open the repo as a CLion project.
+5. Navigate to `File => Settings => Build, Execution, Deployment => Toolchains`.
+6. Create a Visual Studio and let CLion autodetect all paths and settings.
+7. Navigate to `File => Settings => Build, Execution, Deployment => CMake`.
+8. Create two CMake profiles for Debug and Release respectively.
+9. Set each of the two CMake profiles to use the Visual Studio toolchain you created above.
+10. In the `CMake Options` field, add the following (and replace with your vcpkg path):
 ```
 -DCMAKE_TOOLCHAIN_FILE="<path/to/vcpkg>/scripts/buildsystems/vcpkg.cmake"
 ```
