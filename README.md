@@ -16,10 +16,11 @@
 - [x] glfw3
 - [x] imgui (docking branch, opengl and glfw bindings)
 - [x] imguizmo
+- [x] implot
 - [x] glm
 - [x] spdlog
 ```
-vcpkg install glfw3 glad imgui[core,docking-experimental,opengl3-binding,glfw-binding] imguizmo glm spdlog --triplet x64-windows
+vcpkg install glfw3 glad imgui[core,docking-experimental,opengl3-binding,glfw-binding] imguizmo implot glm spdlog --triplet x64-windows
 ```
 3. Clone the repo.
 4. Open the repo as a CLion project.

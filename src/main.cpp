@@ -4,6 +4,7 @@
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_glfw.h>
 #include <ImGuizmo.h>
+#include <implot.h>
 
 void SetupImGuiTheme();
 void OnGui();
@@ -35,6 +36,7 @@ int main() {
     IMGUI_CHECKVERSION();
     context = ImGui::CreateContext();
     ImGui::SetCurrentContext(context);
+    ImPlot::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
@@ -188,6 +190,8 @@ void OnGui() {
     ImGui::ShowStyleSelector("Theme");
     ImGui::ShowStyleEditor();
     ImGui::End();
+
+    ImPlot::ShowDemoWindow();
 
     ImGui::End();
 }

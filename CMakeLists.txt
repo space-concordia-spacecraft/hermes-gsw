@@ -16,6 +16,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glad REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(imguizmo CONFIG REQUIRED)
+find_package(implot CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(assimp CONFIG REQUIRED)
 find_package(spdlog REQUIRED)
@@ -27,7 +28,7 @@ file(GLOB_RECURSE GSW_SRC "src/**.cpp")
 add_executable("GSW" ${GSW_SRC})
 
 # Link target
-target_link_libraries("GSW" PUBLIC glfw glad::glad imgui::imgui imguizmo::imguizmo glm assimp::assimp spdlog::spdlog_header_only)
+target_link_libraries("GSW" PUBLIC glfw glad::glad imgui::imgui imguizmo::imguizmo implot::implot glm assimp::assimp spdlog::spdlog_header_only)
 target_include_directories("GSW" PUBLIC include ${STB_INCLUDE_DIRS})
 target_precompile_headers("GSW" PUBLIC include/pch.h)
 
