@@ -36,3 +36,6 @@ vcpkg install glfw3 glad imgui[core,docking-experimental,opengl3-binding,glfw-bi
 10. Save your changes and close the settings dialog.
 11. Right-click the root `CMakeLists.txt` file and load the CMake project.
 12. You should now be able to build the GSW executable through the run configuration created by CMake.
+
+### Documentation
+
