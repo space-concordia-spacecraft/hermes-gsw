@@ -1,7 +1,7 @@
 #include "Hermes.h"
 
 
-int main(){
+int main() {
     Hermes hermes = Hermes();
-    hermes.run();
+    hermes.Run();
 }

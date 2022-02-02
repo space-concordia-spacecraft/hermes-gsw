@@ -22,11 +22,12 @@ int Hermes::SetupGLFW() {
         return -1;
 }
 
-void Hermes::SetupImGui(){
+void Hermes::SetupImGui() {
     IMGUI_CHECKVERSION();
     m_Context = ImGui::CreateContext();
     ImPlot::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO &io = ImGui::GetIO();
+    (void) io;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;// Enable Keyboard Controls
@@ -36,40 +37,40 @@ void Hermes::SetupImGui(){
     ImGui::StyleColorsDark();
 }
 
-void Hermes::addWindow(GroundStationWindow *window) {
+void Hermes::AddWindow(UIWindowTemplate *window) {
     m_Modules.push_back(window);
 }
 
 void Hermes::RenderModules() {
-    for(auto window: this->m_Modules){
+    for (auto window: this->m_Modules) {
         window->RenderGUI();
     }
 }
 
-void Hermes::CreateDockspace(){
+void Hermes::CreateDockspace() {
     m_Viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(m_Viewport->Pos);
     ImGui::SetNextWindowSize(m_Viewport->Size);
     ImGui::SetNextWindowViewport(m_Viewport->ID);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0.0f, 0.0f });
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, {0.0f, 0.0f});
     ImGui::Begin("DockSpace", nullptr, windowFlags);
-    ImGui::DockSpace(ImGui::GetID("DockSpace"), { 0.0f, 0.0f }, ImGuiDockNodeFlags_None);
+    ImGui::DockSpace(ImGui::GetID("DockSpace"), {0.0f, 0.0f}, ImGuiDockNodeFlags_None);
     ImGui::PopStyleVar(3);
 }
 
-void Hermes::CreateMenuBar(){
+void Hermes::CreateMenuBar() {
     if (ImGui::BeginMenuBar()) {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("Exit", "Alt+F4"))
                 glfwSetWindowShouldClose(m_Window, GLFW_TRUE);
             if (ImGui::BeginMenu("Add Window", "Ctrl+F3")) {
-                if(ImGui::MenuItem("ADCS", NULL)){
-                    this->addWindow((new ImPlotDemo())->GetPtr());
+                if (ImGui::MenuItem("ADCS", NULL)) {
+                    this->AddWindow((new ImPlotDemo())->GetPtr());
                 }
-                if(ImGui::MenuItem("Comms", NULL)){
-                    this->addWindow((new DemoWindow("Demo Window"))->GetPtr());
+                if (ImGui::MenuItem("Comms", NULL)) {
+                    this->AddWindow((new DemoWindow("Demo Window"))->GetPtr());
                 }
                 ImGui::EndMenu();
             }
@@ -80,17 +81,16 @@ void Hermes::CreateMenuBar(){
     }
 }
 
-void Hermes::PollEvents(){
+void Hermes::PollEvents() {
 
     ImGui::SetCurrentContext(m_Context);
     m_Io = ImGui::GetIO();
     int display_w, display_h;
     glfwGetFramebufferSize(m_Window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
-    m_Io.DisplaySize = ImVec2((float)display_w, (float)display_h);
+    m_Io.DisplaySize = ImVec2((float) display_w, (float) display_h);
 
-    if (m_Io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-    {
+    if (m_Io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
         m_GlfwContext = glfwGetCurrentContext();
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
@@ -99,17 +99,16 @@ void Hermes::PollEvents(){
     glfwPollEvents();
 }
 
-void Hermes::UpdateWindows(){
+void Hermes::UpdateWindows() {
     PollEvents();
     glfwSwapBuffers(m_Window);
 }
 
-int Hermes::run(){
+int Hermes::Run() {
     SetupGLFW();
     SetupImGui();
 
-    while (!glfwWindowShouldClose(m_Window))
-    {
+    while (!glfwWindowShouldClose(m_Window)) {
         glfwPollEvents();
         glClearColor(0.0f, 0.0f, 0.0f, 1.00f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -125,9 +124,7 @@ int Hermes::run(){
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-
         UpdateWindows();
-
     }
 
     ImGui_ImplOpenGL3_Shutdown();
