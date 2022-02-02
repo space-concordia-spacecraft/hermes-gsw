@@ -17,50 +17,49 @@
 class Hermes{
 private:
     int windowFlags =ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking |ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse |ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-    GLFWwindow* window;
-    GLFWwindow* glfwContext;
-    ImGuiContext* context;
-    ImGuiIO io;
-    std::vector<GroundStationWindow*> modules;
-    std::vector<bool> visibility;
-    ImGuiViewport* viewport;
+    GLFWwindow* m_Window;
+    GLFWwindow* m_GlfwContext;
+    ImGuiContext* m_Context;
+    ImGuiIO m_Io;
+    std::vector<GroundStationWindow*> m_Modules;
+    ImGuiViewport* m_Viewport;
 
     /**
-     * Creates the GLFW context for Hermes Application
-     * @return -1 if context creation failed.
+     * Creates the GLFW m_Context for Hermes Application
+     * @return -1 if m_Context creation failed.
      */
-    int setupGLFW();
+    int SetupGLFW();
     /**
-     * Creates the Context for the ImGUI modules in Hermes
+     * Creates the Context for the ImGUI m_Modules in Hermes
      */
-    void setupImGui();
+    void SetupImGui();
 
     /**
      * Renders the List of Modules Present in the Module.
      */
-    void renderModules();
+    void RenderModules();
     /**
      * Creates the Dockspace, so that the windows can be docked in the Main Application.
      */
-    void createDockspace();
+    void CreateDockspace();
     /**
      * Creates the Menu bar for the Main Application. This is also the way to interact with the Application.
      */
-    void createMenuBar();
+    void CreateMenuBar();
 
-//    void ProcessInput(GLFWwindow* window) {
-//        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-//            glfwSetWindowShouldClose(window, true);
+//    void ProcessInput(GLFWwindow* m_Window) {
+//        if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+//            glfwSetWindowShouldClose(m_Window, true);
 //    }
 
     /**
-     * Polls the Events in the GLFW context and renders the new changes.
+     * Polls the Events in the GLFW m_Context and renders the new changes.
      */
-    void pollEvents();
+    void PollEvents();
     /**
-     * Calls pollEvents to Update Windows and swaps GLFW buffers.
+     * Calls PollEvents to Update Windows and swaps GLFW buffers.
      */
-    void updateWindows();
+    void UpdateWindows();
 
 
 public:

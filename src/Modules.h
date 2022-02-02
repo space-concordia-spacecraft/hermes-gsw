@@ -3,55 +3,55 @@
 
 class GroundStationWindow{
 public:
-    virtual void renderGUI()=0;
-    virtual GroundStationWindow* getPtr()=0;
+    virtual void RenderGUI()=0;
+    virtual GroundStationWindow* GetPtr()=0;
 };
 
 class DemoWindow: public GroundStationWindow{
-    const string windowName;
+    const string m_WindowName;
 public:
-    DemoWindow(string name):windowName(name){
+    DemoWindow(string name): m_WindowName(name){
     }
-    void renderGUI() override{
-        ImGui::Begin(windowName.c_str());
-        ImGui::Text("%s", windowName.c_str());
+    void RenderGUI() override{
+        ImGui::Begin(m_WindowName.c_str());
+        ImGui::Text("%s", m_WindowName.c_str());
         ImGui::End();
     }
 
-    GroundStationWindow * getPtr() override{
+    GroundStationWindow * GetPtr() override{
         return this;
     }
 };
 
 class DemoWindow2: public GroundStationWindow{
-    const string windowName;
+    const string m_WindowName;
 public:
-    DemoWindow2(string name):windowName(name){
+    DemoWindow2(string name): m_WindowName(name){
 
     }
-    void renderGUI() override{
-        ImGui::Begin(windowName.c_str());
-        ImGui::Text("%s", windowName.c_str());
+    void RenderGUI() override{
+        ImGui::Begin(m_WindowName.c_str());
+        ImGui::Text("%s", m_WindowName.c_str());
         ImGui::End();
     }
 
-    GroundStationWindow* getPtr(){
+    GroundStationWindow* GetPtr(){
         return this;
     }
 };
 
 class ImPlotDemo : public GroundStationWindow{
-    string windowName;
+    string m_WindowName;
 public:
     ImPlotDemo(){
-        windowName=" ";
+        m_WindowName=" ";
     }
 
-    void renderGUI() override{
+    void RenderGUI() override{
         ImPlot::ShowDemoWindow();
     }
 
-    GroundStationWindow * getPtr() override{
+    GroundStationWindow * GetPtr() override{
         return this;
     }
 };
