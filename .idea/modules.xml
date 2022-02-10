@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/hermes-gsw.iml" filepath="$PROJECT_DIR$/.idea/hermes-gsw.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/hermes-gsw2.iml" filepath="$PROJECT_DIR$/.idea/hermes-gsw2.iml" />
     </modules>
   </component>
 </project>
