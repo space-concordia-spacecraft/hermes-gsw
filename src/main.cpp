@@ -1,7 +1,7 @@
-#include "Hermes.h"
-
+#include "core/Application.h"
 
 int main() {
-    Hermes hermes = Hermes();
-    hermes.Run();
+    auto* hermes = new hermes::Application();
+    hermes->Run();
+    delete hermes;
 }
