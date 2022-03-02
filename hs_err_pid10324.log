@@ -1,0 +1,199 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 268435456 bytes for Failed to commit area from 0x0000000700c00000 to 0x0000000710c00000 of length 268435456.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (./src/hotspot/os/windows/os_windows.cpp:3521), pid=10324, tid=15044
+#
+# JRE version:  (11.0.12+7) (build )
+# Java VM: OpenJDK 64-Bit Server VM (11.0.12+7-b1504.40, mixed mode, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: git4idea.http.GitAskPassApp Username for 'https://github.com': 
+
+Host: AMD Ryzen 5 2600 Six-Core Processor            , 12 cores, 15G,  Windows 10 , 64 bit Build 17763 (10.0.17763.475)
+Time: Wed Mar  2 16:10:48 2022 Eastern Standard Time elapsed time: 0.016524 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000002b84eb8e000):  JavaThread "Unknown thread" [_thread_in_vm, id=15044, stack(0x000000f96c500000,0x000000f96c600000)]
+
+Stack: [0x000000f96c500000,0x000000f96c600000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x5ff40a]
+V  [jvm.dll+0x783b65]
+V  [jvm.dll+0x78517d]
+V  [jvm.dll+0x785833]
+V  [jvm.dll+0x249408]
+V  [jvm.dll+0x5fc7f4]
+V  [jvm.dll+0x5f13c5]
+V  [jvm.dll+0x3076bb]
+V  [jvm.dll+0x30762a]
+V  [jvm.dll+0x307502]
+V  [jvm.dll+0x30c466]
+V  [jvm.dll+0x355543]
+V  [jvm.dll+0x355c46]
+V  [jvm.dll+0x355643]
+V  [jvm.dll+0x2e2018]
+V  [jvm.dll+0x2e31c7]
+V  [jvm.dll+0x761f57]
+V  [jvm.dll+0x76374c]
+V  [jvm.dll+0x362ab9]
+V  [jvm.dll+0x7455be]
+V  [jvm.dll+0x3cb673]
+V  [jvm.dll+0x3cda21]
+C  [jli.dll+0x536b]
+C  [ucrtbase.dll+0x21ffa]
+C  [KERNEL32.DLL+0x17974]
+C  [ntdll.dll+0x6a271]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000002b84ca07460, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x000002b84eba5800 GCTaskThread "GC Thread#0" [stack: 0x000000f96c600000,0x000000f96c700000] [id=10212]
+  0x000002b84ec05000 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000f96c700000,0x000000f96c800000] [id=6988]
+  0x000002b84ec06800 ConcurrentGCThread "G1 Conc#0" [stack: 0x000000f96c800000,0x000000f96c900000] [id=2012]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffcb21b27a7]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x000002b84eb8ae20] Heap_lock - owner thread: 0x000002b84eb8e000
+
+Heap address: 0x0000000700c00000, size: 4084 MB, Compressed Oops mode: Non-zero based: 0x0000000700c00000
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (1 events):
+Event: 0.010 Loaded shared library C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\zip.dll
+
+
+Dynamic libraries:
+0x00007ff6dd390000 - 0x00007ff6dd39a000 	C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\java.exe
+0x00007ffcdc760000 - 0x00007ffcdc94d000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffcdb0c0000 - 0x00007ffcdb173000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffcd9710000 - 0x00007ffcd99a3000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffcd8ea0000 - 0x00007ffcd8f9a000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffcc1d20000 - 0x00007ffcc1d39000 	C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\jli.dll
+0x00007ffcc0f70000 - 0x00007ffcc0f87000 	C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\VCRUNTIME140.dll
+0x00007ffcdb3d0000 - 0x00007ffcdb567000 	C:\Windows\System32\USER32.dll
+0x00007ffcd8c10000 - 0x00007ffcd8c30000 	C:\Windows\System32\win32u.dll
+0x00007ffccd350000 - 0x00007ffccd5c9000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17763.864_none_05b3441807210760\COMCTL32.dll
+0x00007ffcdafe0000 - 0x00007ffcdb009000 	C:\Windows\System32\GDI32.dll
+0x00007ffcd8850000 - 0x00007ffcd89e9000 	C:\Windows\System32\gdi32full.dll
+0x00007ffcdc240000 - 0x00007ffcdc2de000 	C:\Windows\System32\msvcrt.dll
+0x00007ffcd8ac0000 - 0x00007ffcd8b60000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffcdbc10000 - 0x00007ffcdbf3c000 	C:\Windows\System32\combase.dll
+0x00007ffcdb8b0000 - 0x00007ffcdb9d2000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffcd8a40000 - 0x00007ffcd8abe000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffcdb580000 - 0x00007ffcdb5ae000 	C:\Windows\System32\IMM32.DLL
+0x00007ffca8920000 - 0x00007ffca89bd000 	C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\msvcp140.dll
+0x00007ffcb1ec0000 - 0x00007ffcb2a18000 	C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\server\jvm.dll
+0x00007ffcdaf30000 - 0x00007ffcdafd3000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffcdc0f0000 - 0x00007ffcdc18e000 	C:\Windows\System32\sechost.dll
+0x00007ffcdb200000 - 0x00007ffcdb208000 	C:\Windows\System32\PSAPI.DLL
+0x00007ffcc8680000 - 0x00007ffcc8689000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ffcd4fd0000 - 0x00007ffcd4ff4000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffcdb690000 - 0x00007ffcdb6fd000 	C:\Windows\System32\WS2_32.dll
+0x00007ffcd3140000 - 0x00007ffcd314a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffcd4fa0000 - 0x00007ffcd4fcd000 	C:\Windows\SYSTEM32\winmmbase.dll
+0x00007ffcd89f0000 - 0x00007ffcd8a3a000 	C:\Windows\System32\cfgmgr32.dll
+0x00007ffcd8780000 - 0x00007ffcd8791000 	C:\Windows\System32\kernel.appcore.dll
+0x00007ffcd6aa0000 - 0x00007ffcd6ab1000 	C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\verify.dll
+0x00007ffcc53c0000 - 0x00007ffcc55ad000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffcc7d40000 - 0x00007ffcc7d6a000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffcd3fd0000 - 0x00007ffcd3ff9000 	C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\java.dll
+0x00007ffcd60a0000 - 0x00007ffcd60ab000 	C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\jimage.dll
+0x00007ffcd3530000 - 0x00007ffcd3548000 	C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\zip.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17763.864_none_05b3441807210760;C:\Program Files\JetBrains\CLion 2021.2.3\jbr\bin\server
+
+VM Arguments:
+java_command: git4idea.http.GitAskPassApp Username for 'https://github.com': 
+java_class_path (initial): C:/Program Files/JetBrains/CLion 2021.2.3/plugins/git4idea/lib/git4idea-rt.jar;C:/Program Files/JetBrains/CLion 2021.2.3/lib/3rd-party.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 268435456                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4282384384                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5836300                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122910970                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122910970                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=C:/Program Files/Git/mingw64/libexec/git-core;C:/Program Files/Git/mingw64/libexec/git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\David\bin;C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32\compiler;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Polyspace\R2019a\runtime\win64;C:\Program Files\Polyspace\R2019a\bin;C:\Program Files\Polyspace\R2019a\polyspace\bin;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\dotnet\;C:\Users\David\AppData\Local\Microsoft\WindowsApps;C:\Users\David\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\David\Desktop\COEN244\codeblocks-20.03mingw-nosetup (1)\MinGW\bin;C:\Users\David\.dotnet\tools
+USERNAME=David
+DISPLAY=:0.0
+LC_ALL=en_US.UTF-8
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 8 Stepping 2, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 17763 (10.0.17763.475)
+OS uptime: 9 days 3:28 hours
+
+CPU:total 12 (initial active 12) (12 cores per cpu, 2 threads per core) family 23 model 8 stepping 2 microcode 0x0, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, ht, tsc, tscinvbit, tscinv, bmi1, bmi2, adx, sha, fma
+
+Memory: 4k page, system-wide physical 16334M (7107M free)
+TotalPageFile size 16334M (AvailPageFile size 105M)
+current process WorkingSet (physical memory assigned to process): 10M, peak: 10M
+current process commit charge ("private bytes"): 64M, peak: 320M
+
+vm_info: OpenJDK 64-Bit Server VM (11.0.12+7-b1504.40) for windows-amd64 JRE (11.0.12+7-b1504.40), built on Sep 23 2021 14:38:03 by "" with MS VC++ 14.0 (VS2015)
+
+END.
