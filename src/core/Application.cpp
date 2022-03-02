@@ -1,4 +1,4 @@
-#include "core/Application.h"
+#include "core/application.h"
 
 namespace hermes {
 
