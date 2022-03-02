@@ -1,5 +1,6 @@
 #include "core/application.h"
 
+// Hello?
 namespace hermes {
 
     int Application::SetupGLFW() {
