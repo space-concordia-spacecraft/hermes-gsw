@@ -121,8 +121,19 @@ namespace hermes {
             }
     }
 
-    bool WindowCommunication::Write() {
+    bool WindowCommunication::Write(const char *buffer, unsigned int nbChar) {
+        DWORD bytesSend;
 
+        //Try to write the buffer on the Serial port
+        if(!WriteFile(this->hSerial, (void *)buffer, nbChar, &bytesSend, 0))
+        {
+            //In case it don't work get comm error and return false
+            ClearCommError(this->hSerial, &this->errors, &this->status);
+
+            return false;
+        }
+        else
+            return true;
     }
 
     string WindowCommunication::GetName() const {
@@ -133,3 +144,4 @@ namespace hermes {
         ImPlot::ShowDemoWindow();
     }
 }
+
