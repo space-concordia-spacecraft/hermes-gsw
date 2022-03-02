@@ -1,7 +1,5 @@
 #pragma once
 
-#include "hs_codes.h"
-
 namespace hermes {
 
     class UIWindow {

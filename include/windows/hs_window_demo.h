@@ -1,13 +1,13 @@
 #pragma once
 
-#include "core/ui_window.h"
+#include "core/hs_ui_window.h"
 
 namespace hermes {
 
-    class DemoWindow : public UIWindow {
+    class WindowDemo : public UIWindow {
 
     public:
-        DemoWindow(string name)
+        WindowDemo(string name)
                 : m_WindowName(move(name)) {}
 
         void RenderGUI() override {

@@ -1,4 +1,4 @@
-#include "core/application.h"
+#include "core/hs_application.h"
 
 namespace hermes {
 
@@ -74,10 +74,10 @@ namespace hermes {
                     glfwSetWindowShouldClose(m_Window, GLFW_TRUE);
                 if (ImGui::BeginMenu("Add Window", "Ctrl+F3")) {
                     if (ImGui::MenuItem("ADCS", nullptr)) {
-                        this->AddWindow(new ImPlotDemoWindow());
+                        this->AddWindow(new WindowImPlotDemo());
                     }
                     if (ImGui::MenuItem("Comms", nullptr)) {
-                        this->AddWindow(new DemoWindow("Demo Window"));
+                        this->AddWindow(new WindowCommunication());
                     }
                     ImGui::EndMenu();
                 }
