@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/UIWindow.h"
+#include "core/ui_window.h"
 
 namespace hermes {
 

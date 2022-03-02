@@ -8,8 +8,8 @@
 #include <ImGuizmo.h>
 #include <implot.h>
 
-#include "windows/DemoWindow.h"
-#include "windows/ImPlotDemoWindow.h"
+#include "windows/demo_window.h"
+#include "windows/im_plot_demo_window.h"
 
 namespace hermes {
 
