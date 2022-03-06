@@ -5,6 +5,8 @@
 #include <memory>
 #include <string>
 #include <windows.h>
+#include <winnt.h>
+#include <tchar.h>
 
 #include <glm/glm.hpp>
 

@@ -1,14 +1,8 @@
 #pragma once
 
 #include <imgui.h>
-#include <windows.h>
-#include <winnt.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <tchar.h>
-#include <string>
 #include "core/hs_ui_window.h"
-
+#include "components/hs_component_logger.h"
 
 namespace hermes {
     class WindowCommunication : public UIWindow {
@@ -16,7 +10,7 @@ namespace hermes {
     public:
         WindowCommunication();
         ~WindowCommunication();
-        void RenderGUI();
+        void RenderGUI() override;
         string GetName() const;
 
         void Connect(const char* portName);
