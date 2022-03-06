@@ -5,3 +5,4 @@ int main() {
     hermes->Run();
     delete hermes;
 }
+

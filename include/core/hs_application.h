@@ -7,6 +7,10 @@
 #include <imgui_impl_glfw.h>
 #include <ImGuizmo.h>
 #include <implot.h>
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <tchar.h>
 
 #include "hs_codes.h"
 
