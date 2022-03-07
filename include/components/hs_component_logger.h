@@ -14,7 +14,7 @@ namespace hermes {
         //! ComponentLogger constructor
         //!
         //! \param name the name of the window
-        ComponentLogger(string name);
+        explicit ComponentLogger(string name);
         //! \brief Clears the logs
         void Clear();
         //! \brief Adds a new line to the terminal
@@ -24,7 +24,7 @@ namespace hermes {
         //! \brief Gets the name of the window
         //!
         //! \return Name of the window
-        string GetName() const;
+        string GetName() const override;
 
     private:
         /// Text buffer for the output on the terminal

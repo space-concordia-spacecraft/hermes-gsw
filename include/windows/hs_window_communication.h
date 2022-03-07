@@ -14,13 +14,13 @@ namespace hermes {
         void RenderGUI() override;
         string GetName() const;
 
-        void Connect(const char* portName);
-        bool Disconnect();
+        HsResult Connect(const char* portName);
+        HsResult Disconnect();
 
         bool IsConnected();
 
         int Read(char *buffer, unsigned int nbChar);
-        bool Write(const char *buffer, unsigned int nbChar);
+        HsResult Write(const char *buffer, unsigned int nbChar);
 
     private:
         bool connected;

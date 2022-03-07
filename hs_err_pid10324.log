@@ -85,7 +85,7 @@ VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
 Heap address: 0x0000000700c00000, size: 4084 MB, Compressed Oops mode: Non-zero based: 0x0000000700c00000
 Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
 
-GC Heap History (0 events):
+GC Heap m_History (0 events):
 No events
 
 Deoptimization events (0 events):

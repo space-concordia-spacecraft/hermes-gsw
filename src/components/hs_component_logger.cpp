@@ -1,7 +1,7 @@
 #include "components/hs_component_logger.h"
 
 namespace hermes {
-    ComponentLogger::ComponentLogger(string name):m_Name(name) {
+    ComponentLogger::ComponentLogger(string name):m_Name(std::move(name)) {
         m_AutoScroll = true;
         Clear();
     }
@@ -43,7 +43,7 @@ namespace hermes {
         ImGui::SameLine();
         bool copy = ImGui::Button("Copy");
         ImGui::SameLine();
-        m_Filter.Draw("Filter", -100.0f);
+        m_Filter.Draw("m_Filter", -100.0f);
 
         ImGui::Separator();
         ImGui::BeginChild("scrolling", ImVec2(0, 0), false, ImGuiWindowFlags_HorizontalScrollbar);

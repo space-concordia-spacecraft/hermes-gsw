@@ -6,7 +6,7 @@ namespace hermes {
 
     WindowCommunication::~WindowCommunication() {}
 
-    void WindowCommunication::Connect(const char* portName) {
+    HsResult WindowCommunication::Connect(const char* portName) {
         //Try to connect to the given port through CreateFile
         this->hSerial = CreateFile(portName,
                                    GENERIC_READ | GENERIC_WRITE,
@@ -60,9 +60,11 @@ namespace hermes {
                 }
             }
         }
+
+        return HS_SUCCESS;
     }
 
-    bool WindowCommunication::Disconnect() {
+    HsResult WindowCommunication::Disconnect() {
         //Check if we are connected before trying to disconnect
         if (this->connected) {
             //We're no longer connected
@@ -71,7 +73,7 @@ namespace hermes {
             CloseHandle(this->hSerial);
             printf("Connection Terminated\n");
         }
-        return true;
+        return HS_SUCCESS;
     }
 
     bool WindowCommunication::IsConnected() {
@@ -109,7 +111,7 @@ namespace hermes {
     }
 
 
-    bool WindowCommunication::Write(const char* buffer, unsigned int nbChar) {
+    HsResult WindowCommunication::Write(const char* buffer, unsigned int nbChar) {
         DWORD bytesSend;
 
         //Try to write the buffer on the Serial port
@@ -117,9 +119,9 @@ namespace hermes {
             //In case it don't work get comm error and return false
             ClearCommError(this->hSerial, &this->errors, &this->status);
 
-            return false;
+            return HS_ERROR;
         } else {
-            return true;
+            return HS_SUCCESS;
         }
     }
 
@@ -129,7 +131,7 @@ namespace hermes {
 
     void WindowCommunication::RenderGUI() {
         static bool my_tool_active = true;
-        static const char* items[]{ "Overview", "Health", "ADCS", "Thermal", "Battery", "Payload", "Commands" };
+        static const char* items[]{ "Overview", "Health", "ADCS", "Thermal", "Battery", "Payload", "m_Commands" };
         static int selectedItem = 0;
         static bool* p_open;
 
@@ -139,6 +141,7 @@ namespace hermes {
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4) ImColor::HSV(2 / 7.0f, 0.7f, 0.7f));
         ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4) ImColor::HSV(2 / 7.0f, 0.8f, 0.8f));
         if (ImGui::Button("Connect")) {
+            // TODO: Make it so that it checks what COM ports are available to change
             Connect("\\\\.\\COM6");
             if (IsConnected()) {
                 printf("Connection Established\n");
@@ -167,10 +170,8 @@ namespace hermes {
         }
 
 
-        ImGui::BeginChild("Scrolling");
-
-        static ComponentLogger log;
-        ImGui::BeginChild("ComponentLogger");
+        static ComponentLogger log("Logger");
+        ImGui::BeginChild("Connection");
         if (IsConnected()) {
             char incomingData[256] = "";            // don't forget to pre-allocate memory
             //printf("%s\n",incomingData);
@@ -187,12 +188,9 @@ namespace hermes {
         log.RenderGUI();
 
 
-        static ComponentConsole console;
+        static ComponentConsole console("Console");
         console.RenderGUI();
 
-
-        //ImGui::ShowDemoWindow();
-        ImGui::EndChild();
         ImGui::End();
 
     }

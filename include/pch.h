@@ -8,6 +8,8 @@
 #include <winnt.h>
 #include <tchar.h>
 
+#include "hs_codes.h"
+
 #include <glm/glm.hpp>
 
 using std::string;
