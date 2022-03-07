@@ -169,8 +169,8 @@ namespace hermes {
 
         ImGui::BeginChild("Scrolling");
 
-        static Logger log;
-        ImGui::BeginChild("Logger");
+        static ComponentLogger log;
+        ImGui::BeginChild("ComponentLogger");
         if (IsConnected()) {
             char incomingData[256] = "";            // don't forget to pre-allocate memory
             //printf("%s\n",incomingData);
