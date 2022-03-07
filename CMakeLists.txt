@@ -24,7 +24,7 @@ find_package(spdlog REQUIRED)
 file(GLOB_RECURSE HERMES_SRC "src/**.cpp")
 
 # Create executable from source
-add_executable("Hermes" ${HERMES_SRC})
+add_executable("Hermes" ${HERMES_SRC} src/components/hs_component_console.cpp include/components/hs_component_console.h)
 
 # Link target
 target_link_libraries("Hermes" PUBLIC glfw glad::glad imgui::imgui imguizmo::imguizmo implot::implot glm::glm spdlog::spdlog_header_only)
