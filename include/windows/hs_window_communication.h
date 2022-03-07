@@ -3,6 +3,7 @@
 #include <imgui.h>
 #include "core/hs_ui_window.h"
 #include "components/hs_component_logger.h"
+#include "components/hs_component_console.h"
 
 namespace hermes {
     class WindowCommunication : public UIWindow {
