@@ -28,6 +28,8 @@ namespace hermes {
 
         string GetName() const override;
 
+
+
     private:
         char m_InputBuf[256]{};
         ImVector<char*> m_Items;
@@ -38,6 +40,8 @@ namespace hermes {
         bool m_AutoScroll;
         bool m_ScrollToBottom;
         string m_Name;
+
+
     };
 
 

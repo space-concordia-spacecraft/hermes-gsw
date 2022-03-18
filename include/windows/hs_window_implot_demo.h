@@ -1,6 +1,6 @@
 #pragma once
-
 #include "core/hs_ui_window.h"
+#include "implot.h"
 
 namespace hermes {
 

@@ -7,15 +7,13 @@ namespace hermes{
         ClearLog();
         memset(m_InputBuf, 0, sizeof(m_InputBuf));
         m_HistoryPos = -1;
-
-        // "CLASSIFY" is here to provide the test case where "C"+[tab] completes to "CL" and display multiple matches.
         m_Commands.push_back("HELP");
         m_Commands.push_back("HISTORY");
         m_Commands.push_back("CLEAR");
         m_Commands.push_back("CLASSIFY");
         m_AutoScroll = true;
         m_ScrollToBottom = false;
-        AddLog("Welcome to Dear ImGui!");
+        AddLog("<Enter Command>");
     }
 
     ComponentConsole::~ComponentConsole() {
@@ -25,40 +23,85 @@ namespace hermes{
     }
 
     void ComponentConsole::RenderGUI() {
-        if (!ImGui::Begin(m_Name.c_str())) {
-            ImGui::End();
+        if (!ImGui::BeginChild(m_Name.c_str())) {
+            ImGui::EndChild();
             return;
         }
 
+        ImGui::Separator();
+        ImGui::TextWrapped("CONSOLE"); ImGui::SameLine();
+        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 0, 255));
+        ImGui::TextWrapped("\tEnter 'HELP' for list of commands");
+        ImGui::PopStyleColor();
+        ImGui::Separator();
 
-        ImGui::TextWrapped("Enter 'HELP' for help.");
 
-        if (ImGui::SmallButton("Add Debug Text")) {
+        //TODO: Possible Pop-up Save Menu to include save-as
+        /*if (ImGui::Button("Save")) {
+            ImGui::OpenPopup("Save");
+        }
+            if (ImGui::BeginPopup("Save")) {
+                if (ImGui::MenuItem("Save", "Ctrl+S")) {};
+                if (ImGui::MenuItem("Save As..")) {};
+                ImGui::EndPopup();
+            }
+            */
+
+        if (ImGui::SmallButton("Debug Text")) {
             AddLog("%d some text", m_Items.Size);
             AddLog("some more text");
             AddLog("display very important message here!");
         }
         ImGui::SameLine();
-        if (ImGui::SmallButton("Add Debug Error")) { AddLog("[error] something went wrong"); }
+        if (ImGui::SmallButton("Debug Error")) { AddLog("[error] something went wrong"); }
         ImGui::SameLine();
         if (ImGui::SmallButton("Clear")) { ClearLog(); }
         ImGui::SameLine();
         bool copy_to_clipboard = ImGui::SmallButton("Copy");
-        //static float t = 0.0f; if (ImGui::GetTime() - t > 0.02f) { t = ImGui::GetTime(); AddLog("Spam %f", t); }
+        ImGui::SameLine();
+
+        bool save_console = ImGui::SmallButton("Save");
+        if(save_console){
+
+            ImGui::LogToClipboard();
+            const char *path="C:/Users/David/Desktop/Hermes Test Text files/Console Test - 1.txt" ;
+            std::ofstream file(path);
+            file << "Hermes Ground-Station Software - Space Concordia 2022 - Console Test - 1.txt\n";
+            file << "Component: Console\n\n";
+            file << "Start of Console:\n--------------------------------\n\n";
+            file << ImGui::GetClipboardText();
+
+            ImGui::LogToClipboard();
+            const char *path2="C:/Users/David/Desktop/Hermes Test Text files/Console Test - 2.txt" ;
+            std::ofstream file2(path2);
+            file2 << "Hermes Ground-Station Software - Space Concordia 2022 - Console Test - 2.txt\n";
+            file2 << "Component: Console\n\n";
+            file2 << "Start of Console:\n--------------------------------\n\n";
+            file2 << ImGui::GetClipboardText();
+
+            ImGui::LogToClipboard();
+            const char *path3="C:/Users/David/Desktop/Hermes Test Text files/Back-up Logs/Console Test - 2(Back-up).txt" ;
+            std::ofstream file3(path3);
+            file3 << "Hermes Ground-Station Software - Space Concordia 2022 - Console Test(Back up) - 2.txt\n";
+            file3 << "Component: Console\n\n";
+            file3 << "Start of Console:\n--------------------------------\n\n";
+            file3 << ImGui::GetClipboardText();
+        }
+        ImGui::SameLine();
 
         ImGui::Separator();
 
-        // Options menu
+        //! Options menu
         if (ImGui::BeginPopup("Options")) {
             ImGui::Checkbox("Auto-scroll", &m_AutoScroll);
             ImGui::EndPopup();
         }
 
-        // Options, m_Filter
+        //! Options, m_Filter
         if (ImGui::Button("Options"))
             ImGui::OpenPopup("Options");
         ImGui::SameLine();
-        m_Filter.Draw("m_Filter (\"incl,-excl\") (\"error\")", 180);
+        m_Filter.Draw("Filter (\"incl,-excl\") (\"error\")", 180);
         ImGui::Separator();
 
         // Reserve enough left-over height for 1 separator + 1 input text
@@ -80,8 +123,6 @@ namespace hermes{
             if (!m_Filter.PassFilter(item))
                 continue;
 
-            // Normally you would store more information in your item than just a string.
-            // (e.g. make m_Items[] an array of structure, store color/type etc.)
             ImVec4 color;
             bool has_color = false;
             if (strstr(item, "[error]")) {
@@ -90,6 +131,14 @@ namespace hermes{
             }
             else if (strncmp(item, "# ", 2) == 0) {
                 color = ImVec4(1.0f, 0.8f, 0.6f, 1.0f);
+                has_color = true;
+            }
+            else if(strncmp(item, "[Hermes][Console: Port 6][Time:%i]$ %s\n", 3) == 0){
+                color = ImVec4(0.0f, 1.0f, 0.4f, 1.0f);
+                has_color = true;
+            }
+            else if(strncmp(item, "Warning - Unknown Command: '%s'\n", 4) == 0){
+                color = ImVec4(0.9f, 0.9f, 0.0f, 0.5f);
                 has_color = true;
             }
             if (has_color)
@@ -109,7 +158,7 @@ namespace hermes{
         ImGui::EndChild();
         ImGui::Separator();
 
-        // Command-line
+        //! Command-line
         bool reclaim_focus = false;
         ImGuiInputTextFlags input_text_flags =
                 ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CallbackCompletion |
@@ -122,14 +171,15 @@ namespace hermes{
                 ExecCommand(s);
             strcpy(s, "");
             reclaim_focus = true;
+
         }
 
-        // Auto-focus on window apparition
+        //! Auto-focus on window apparition
         ImGui::SetItemDefaultFocus();
         if (reclaim_focus)
             ImGui::SetKeyboardFocusHere(-1); // Auto focus previous widget
 
-        ImGui::End();
+        ImGui::EndChild();
     }
 
     int ComponentConsole::Stricmp(const char* s1, const char* s2) {
@@ -172,21 +222,21 @@ namespace hermes{
     }
 
     void ComponentConsole::AddLog(const char* fmt, ...) IM_FMTARGS(2) {
-        // FIXME-OPT
-        char buf[1024];
-        va_list args;
-                va_start(args, fmt);
-        vsnprintf(buf, IM_ARRAYSIZE(buf), fmt, args);
-        buf[IM_ARRAYSIZE(buf) - 1] = 0;
-                va_end(args);
-        m_Items.push_back(Strdup(buf));
+            // FIXME-OPT
+            char buf[1024];
+            va_list args;
+            va_start(args, fmt);
+            vsnprintf(buf, IM_ARRAYSIZE(buf), fmt, args);
+            buf[IM_ARRAYSIZE(buf) - 1] = 0;
+            va_end(args);
+            m_Items.push_back(Strdup(buf));
     }
 
     void ComponentConsole::ExecCommand(const char* command_line) {
-        AddLog("# %s\n", command_line);
+        AddLog("[Hermes][Console: Port 6][Time:%i]$ %s\n", ImPlot::GetStyle().UseISO8601, command_line);
 
-        // Insert into history. First find match and delete it so it can be pushed to the back.
-        // This isn't trying to be smart or optimal.
+
+        //!History Callback
         m_HistoryPos = -1;
         for (int i = m_History.Size - 1; i >= 0; i--)
             if (Stricmp(m_History[i], command_line) == 0) {
@@ -208,26 +258,21 @@ namespace hermes{
             for (int i = first > 0 ? first : 0; i < m_History.Size; i++)
                 AddLog("%3d: %s\n", i, m_History[i]);
         } else {
-            AddLog("Unknown command: '%s'\n", command_line);
+            AddLog("Warning - Unknown Command: '%s'\n", command_line);
         }
 
-        // On command input, we scroll to bottom even if m_AutoScroll==false
         m_ScrollToBottom = true;
     }
 
-    // In C++11 you'd be better off using lambdas for this sort of forwarding callbacks
      int ComponentConsole::TextEditCallbackStub(ImGuiInputTextCallbackData* data) {
         ComponentConsole* console = (ComponentConsole*) data->UserData;
         return console->TextEditCallback(data);
     }
 
     int ComponentConsole::TextEditCallback(ImGuiInputTextCallbackData* data) {
-        //AddLog("cursor: %d, selection: %d-%d", data->CursorPos, data->SelectionStart, data->SelectionEnd);
         switch (data->EventFlag) {
             case ImGuiInputTextFlags_CallbackCompletion: {
-                // Example of TEXT COMPLETION
 
-                // Locate beginning of current word
                 const char* word_end = data->Buf + data->CursorPos;
                 const char* word_start = word_end;
                 while (word_start > data->Buf) {
@@ -237,7 +282,6 @@ namespace hermes{
                     word_start--;
                 }
 
-                // Build a list of candidates
                 ImVector<const char*> candidates;
                 for (int i = 0; i < m_Commands.Size; i++)
                     if (Strnicmp(m_Commands[i], word_start, (int) (word_end - word_start)) == 0)
@@ -247,13 +291,10 @@ namespace hermes{
                     // No match
                     AddLog("No match for \"%.*s\"!\n", (int) (word_end - word_start), word_start);
                 } else if (candidates.Size == 1) {
-                    // Single match. Delete the beginning of the word and replace it entirely so we've got nice casing.
                     data->DeleteChars((int) (word_start - data->Buf), (int) (word_end - word_start));
                     data->InsertChars(data->CursorPos, candidates[0]);
                     data->InsertChars(data->CursorPos, " ");
                 } else {
-                    // Multiple matches. Complete as much as we can..
-                    // So inputing "C"+Tab will complete to "CL" then display "CLEAR" and "CLASSIFY" as matches.
                     int match_len = (int) (word_end - word_start);
                     for (;;) {
                         int c = 0;
@@ -273,7 +314,6 @@ namespace hermes{
                         data->InsertChars(data->CursorPos, candidates[0], candidates[0] + match_len);
                     }
 
-                    // List matches
                     AddLog("Possible matches:\n");
                     for (int i = 0; i < candidates.Size; i++)
                         AddLog("- %s\n", candidates[i]);
@@ -295,7 +335,6 @@ namespace hermes{
                             m_HistoryPos = -1;
                 }
 
-                // A better implementation would preserve the data on the current input line along with cursor position.
                 if (prev_history_pos != m_HistoryPos) {
                     const char* history_str = (m_HistoryPos >= 0) ? m_History[m_HistoryPos] : "";
                     data->DeleteChars(0, data->BufTextLen);

@@ -26,21 +26,41 @@ namespace hermes {
         //! \return Name of the window
         string GetName() const override;
 
+        //! \brief Buffer previous packet size
+        //!
+        int GetBufferSize(){
+            BufferSize = m_Buf.size();
+            return BufferSize;
+        }
+        //!\brief Writes to Text file by Copying from clipboard
+        void SaveToTxtFile();
+
+
+
+
+
     private:
-        /// Text buffer for the output on the terminal
+        //! Text buffer for the output on the terminal
         ImGuiTextBuffer m_Buf;
 
-        /// Text filter to filter the logs in the terminal
+        //! Text filter to filter the logs in the terminal
         ImGuiTextFilter m_Filter;
 
-        /// Line offset
+        //! Line offset
         ImVector<int> m_LineOffsets;
 
-        /// Flag to know if auto scrolling should be enabled
+        //! Flag to know if auto scrolling should be enabled
         bool m_AutoScroll;
 
-        /// Name of the window
+        //! Name of the window
         string m_Name;
+
+        //! Flag to know when Save button is pressed
+        bool save_log;
+
+        //!Size of Buffer
+        int BufferSize;
+
 
     };
 }
