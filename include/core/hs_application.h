@@ -7,9 +7,16 @@
 #include <imgui_impl_glfw.h>
 #include <ImGuizmo.h>
 #include <implot.h>
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <tchar.h>
 
-#include "windows/demo_window.h"
-#include "windows/im_plot_demo_window.h"
+#include "hs_codes.h"
+
+#include "windows/hs_window_demo.h"
+#include "windows/hs_window_implot_demo.h"
+#include "windows/hs_window_communication.h"
 
 namespace hermes {
 
