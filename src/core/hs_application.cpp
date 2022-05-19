@@ -79,6 +79,9 @@ namespace hermes {
                     if (ImGui::MenuItem("Comms", nullptr)) {
                         this->AddWindow(new WindowCommunication());
                     }
+                    if (ImGui::MenuItem("Elec", nullptr)) {
+                        this->AddWindow(new WindowBattery());
+                    }
                     ImGui::EndMenu();
                 }
 

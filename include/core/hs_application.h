@@ -17,6 +17,7 @@
 #include "windows/hs_window_demo.h"
 #include "windows/hs_window_implot_demo.h"
 #include "windows/hs_window_communication.h"
+#include "windows/hs_window_battery.h"
 
 namespace hermes {
 
