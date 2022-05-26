@@ -82,6 +82,7 @@ namespace hermes {
                     if (ImGui::MenuItem("Elec", nullptr)) {
                         this->AddWindow(new WindowBattery());
                     }
+                    
                     ImGui::EndMenu();
                 }
 
