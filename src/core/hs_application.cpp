@@ -1,5 +1,5 @@
 #include "core/hs_application.h"
-#include "windows/hs_window_thermal.h"
+
 
 namespace hermes {
 
@@ -82,9 +82,6 @@ namespace hermes {
                     }
                     if (ImGui::MenuItem("Elec", nullptr)) {
                         this->AddWindow(new WindowBattery());
-                    }
-                    if (ImGui::MenuItem("Thermal", nullptr)) {
-                        this->AddWindow(new WindowThermal());
                     }
                     ImGui::EndMenu();
                 }
