@@ -20,5 +20,10 @@ namespace hermes {
         string GetName() const;
     private:
 
+        uint64_t mBatteryCellTemp[4];
+        uint32_t mSunSensorTemp;
+        uint64_t mBusFacesTemp[4];
+        uint64_t mReactionWheelTemp;
+        uint64_t mPayloadTemp;
     };
 }
