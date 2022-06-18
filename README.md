@@ -29,10 +29,11 @@ vcpkg install glfw3 glad imgui[core,docking-experimental,opengl3-binding,glfw-bi
 5. Open the repo as a CLion project.
 6. Navigate to `File => Settings => Build, Execution, Deployment => Toolchains`.
 7. Create a Visual Studio and let CLion autodetect all paths and settings.
-8. Navigate to `File => Settings => Build, Execution, Deployment => CMake`.
-9. Create two CMake profiles for Debug and Release respectively.
-10. Set each of the two CMake profiles to use the Visual Studio toolchain you created above.
-11. In the `CMake Options` field, add the following (and replace with your vcpkg path):
+8. Set the architecture to amd64 for the toolchain.
+9. Navigate to `File => Settings => Build, Execution, Deployment => CMake`.
+10. Create two CMake profiles for Debug and Release respectively.
+11. Set each of the two CMake profiles to use the Visual Studio toolchain you created above.
+12. In the `CMake Options` field, add the following (and replace with your vcpkg path):
 ```
 -DCMAKE_TOOLCHAIN_FILE="<path/to/vcpkg>/scripts/buildsystems/vcpkg.cmake"
 ```
